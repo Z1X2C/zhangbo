@@ -1,0 +1,182 @@
+<template>
+	<view class="collect">
+		<view v-if="hasLoginL && empty" class="gologin">
+			<text style="color: #808080;font-size:36px;margin-left: 100px;" >空空如也</text>
+			<text style="color: #DD524D;font-size:16px;margin-left: 160px;"@click="goshoping" >去添加 ></text>
+		</view>
+		<view class="collect_item" v-for="item in orderList" :key="item.id">
+			<image :src="item.src" @click="navigator(item.goodsid)"></image>
+			<view class="right" @click="navigator(item.goodsid)">
+				<view class="tit">{{item.name}}</view>
+				<view class="info"><text>￥{{item.price}}</text>
+				<text>数量:{{item.number}}</text>
+				</view>
+			</view>
+			<view class="delelt">
+				<button class="bu2" type="default" plain="true" size="mini" @click="del(item)">取消订单</button>
+			</view>
+		</view>
+		<uni-popup ref="popup" type="dialog">
+		    <uni-popup-dialog type="input" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
+	</view>
+</template>
+<script>
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	export default {
+		data() {
+			return {
+				orderList:[],
+				delid:'',
+				userid:'',
+				empty:'',
+				//是否登录
+				hasLoginL:'',
+			}
+		},
+		components: {
+		        uniPopup,
+		        uniPopupMessage,
+		        uniPopupDialog
+		    },
+		methods: {
+			close(done){
+			           done()
+			       },
+			confirm(done,value){
+							 var id= this.delid;
+							 var userid=uni.getStorageSync("userid")
+							 uni.request({
+							 	url:'http://192.168.43.132:8089/product/deleteorder',
+							 	data:{
+							 		id,
+									userid,
+							 		},
+							 		success:(res)=>{
+										this.getcollect()
+							 			}
+							 })
+  			     uni.showToast({
+			       title: "已删除"
+			        });
+			        done()
+					this.getcollect()
+			       },
+				   //获取数据
+		async getcollect(){
+			 var userid=uni.getStorageSync("userid")
+			 var distr=true
+			const res= await this.$myRequest({
+			url :'/product/distrtype',
+			data:{
+				userid,
+				distr,
+			}
+		})
+		this.orderList = res.data
+		if(this.orderList.length==0){
+			this.empty=true
+		}else{
+			this.empty=false
+		}
+			},
+			//删除商品
+			del(item){
+				this.delid=item.id;
+				this.$refs.popup.open()
+			 },
+			 //跳转到详情
+		navigator(goodsid){
+				 uni.navigateTo({
+				 	url:'/pages/goods-detail/goods-detail?id='+goodsid
+				 })
+			 },
+			 gologin(){
+			 			 uni.navigateTo({
+			 			 	url: '../login/login',
+			 			 });
+			 },
+			 goshoping(){
+			  uni.reLaunch({
+			  url: '../index/index',
+			     })
+			 },
+		},
+		onShow() {
+			this.getcollect()
+			this.userid=uni.getStorageSync("userid")
+			this.hasLoginL=uni.getStorageSync("user")
+			this.empty=uni.getStorageSync("empty")
+			console.log(this.userid)
+		},
+		onLoad(){
+			
+		}
+	}
+</script>
+
+<style lang="scss"> 
+.collect{
+	.gologin{
+		width: 100%;
+		height: 50px;
+		margin-top: 200px;
+	}
+	.collect_item{
+		width: 90%;
+		margin-left: 2%;
+		margin-top: 10px;
+		border-radius: 10px;
+		border:1px solid #F0AD4E;
+		display: flex;
+		padding: 10rpx 20rpx;
+image{
+	min-width: 200rpx;
+	max-width: 200rpx;
+	height: 150rpx;
+	margin-right: 30px;
+}
+.tit{
+	font-size: 21px;
+}
+.right{
+	width:100px;
+	margin-right: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.info{
+	display: flex;
+	flex-direction: column;
+    justify-content: space-between;
+	font-size: 18px;
+	color: #DD524D;
+	text:nth-child(2)
+	{
+	margin-left: 0px;
+	}
+		}
+.delelt{
+	width: 32px;
+	margin-left: 10px;
+  image{
+	margin-top: 25px;
+	min-width: 30px;
+	max-width: 30px;
+	min-height: 30px;
+	max-height: 30px;
+	margin-left: 1px;
+		    }
+		}
+	}
+	.bu2{
+		   width: 100px;
+		   margin-top: 10px;
+		   border:  0px;
+		   color: #DD524D;
+	}
+}
+</style>

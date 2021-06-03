@@ -1,0 +1,158 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "张鲜生超市"
+			}
+		}, {
+			"path": "pages/cart/cart",
+			"style": {
+				"navigationBarTitleText": "购物车"
+			}
+		}, {
+			"path": "pages/collect/collect",
+			"style": {
+				"navigationBarTitleText": "收藏"
+			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		}, {
+			"path": "pages/meat/meat",
+			"style": {
+				"navigationBarTitleText": "肉禽蛋水产"
+			}
+		}, {
+			"path": "pages/fruit/fruit",
+			"style": {
+				"navigationBarTitleText": "水果"
+			}
+		}, {
+			"path": "pages/vegetables/vegetables",
+			"style": {
+				"navigationBarTitleText": "蔬菜"
+			}
+		}, {
+			"path": "pages/beverages/beverages",
+			"style": {
+				"navigationBarTitleText": "酒水乳品"
+			}
+		}, {
+			"path": "pages/goods-detail/goods-detail",
+			"style": {
+				"navigationBarTitleText": "商品详情"
+			}
+		}, {
+			"path": "pages/orderinfo/orderinfo",
+			"style": {
+				"navigationBarTitleText": "待付款订单",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/orderinfo/createOrder",
+			"style": {
+				"navigationBarTitleText": "确认订单",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "用户注册",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "用户登录",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/orderinfo/oredeinfoto",
+			"style": {
+				"navigationBarTitleText": "已付款订单",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/orderinfo/distrorder",
+			"style": {
+				"navigationBarTitleText": "待收货",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/orderinfo/allorder",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/zuji/zuji",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/pay/pay",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/pay/paysuccess",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "张鲜生超市",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#C0C4CC",
+		"selectedColor": "#fa436a",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/static/tab-home.png",
+				"selectedIconPath": "static/static/tab-home-current.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/collect/collect",
+				"iconPath": "static/static/tab-cate.png",
+				"selectedIconPath": "static/static/tab-cate-current.png",
+				"text": "收藏"
+			},
+			{
+				"pagePath": "pages/cart/cart",
+				"iconPath": "static/static/tab-cart.png",
+				"selectedIconPath": "static/static/tab-cart-current.png",
+				"text": "购物车"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/static/tab-my.png",
+				"selectedIconPath": "static/static/tab-my-current.png",
+				"text": "我的"
+			}
+		]
+	}
+}
